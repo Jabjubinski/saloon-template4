@@ -1,0 +1,28 @@
+/* App-specific styles */
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Image hover scale */
+.group:hover .group-hover\:scale-115 {
+  transform: scale(1.15);
+}
+
+/* Custom rotate X for 3D effects */
+.rotate-x-45 {
+  transform: rotateX(45deg);
+}
+
+/* Scale 80 utility */
+.scale-80 {
+  transform: scale(0.8);
+}
