@@ -1,9 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { MapPin, Phone, Mail, Clock, Send, Instagram, Facebook, Twitter } from 'lucide-react';
-import { toast } from 'sonner';
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Send,
+  Instagram,
+  Facebook,
+  Twitter,
+} from "lucide-react";
+import { toast } from "sonner";
+import CustomDateInput from "@/components/ui/CustomDateInput";
 
 interface ContactInfo {
   icon: React.ReactNode;
@@ -15,35 +25,36 @@ interface ContactInfo {
 const contactInfo: ContactInfo[] = [
   {
     icon: <MapPin className="h-5 w-5" />,
-    title: 'Address',
-    content: '123 Beauty Lane, Suite 100\nNew York, NY 10001',
+    title: "Address",
+    content: "123 Beauty Lane, Suite 100\nNew York, NY 10001",
   },
   {
     icon: <Phone className="h-5 w-5" />,
-    title: 'Phone',
-    content: '(555) 123-4567',
-    href: 'tel:+15551234567',
+    title: "Phone",
+    content: "(555) 123-4567",
+    href: "tel:+15551234567",
   },
   {
     icon: <Mail className="h-5 w-5" />,
-    title: 'Email',
-    content: 'hello@aestheticclinic.com',
-    href: 'mailto:hello@aestheticclinic.com',
+    title: "Email",
+    content: "hello@aestheticclinic.com",
+    href: "mailto:hello@aestheticclinic.com",
   },
   {
     icon: <Clock className="h-5 w-5" />,
-    title: 'Hours',
-    content: 'Mon-Fri: 9AM - 7PM\nSat: 10AM - 5PM',
+    title: "Hours",
+    content: "Mon-Fri: 9AM - 7PM\nSat: 10AM - 5PM",
   },
 ];
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    date: "",
   });
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -56,7 +67,7 @@ const Contact = () => {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (sectionRef.current) {
@@ -68,12 +79,12 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    toast.success("Thank you for your message! We will get back to you soon.");
+    setFormData({ name: "", email: "", phone: "", message: "" });
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -95,8 +106,8 @@ const Contact = () => {
             <h2
               className={`font-display text-h2 text-white mb-4 transition-all duration-600 ease-expo-out ${
                 isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10'
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
               }`}
             >
               Get In Touch
@@ -104,10 +115,10 @@ const Contact = () => {
             <p
               className={`font-body text-lg text-white/70 mb-10 max-w-md transition-all duration-500 ease-smooth ${
                 isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-5'
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-5"
               }`}
-              style={{ transitionDelay: '200ms' }}
+              style={{ transitionDelay: "200ms" }}
             >
               Ready to start your journey? Contact us today for a personalized
               consultation.
@@ -120,8 +131,8 @@ const Contact = () => {
                   key={item.title}
                   className={`group flex items-start gap-4 transition-all duration-500 ease-expo-out ${
                     isVisible
-                      ? 'opacity-100 translate-x-0'
-                      : 'opacity-0 -translate-x-8'
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-8"
                   }`}
                   style={{ transitionDelay: `${300 + index * 100}ms` }}
                 >
@@ -153,15 +164,15 @@ const Contact = () => {
             <div
               className={`flex gap-4 transition-all duration-500 ease-expo-out ${
                 isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-5'
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-5"
               }`}
-              style={{ transitionDelay: '700ms' }}
+              style={{ transitionDelay: "700ms" }}
             >
               {[
-                { icon: <Instagram className="h-5 w-5" />, href: '#' },
-                { icon: <Facebook className="h-5 w-5" />, href: '#' },
-                { icon: <Twitter className="h-5 w-5" />, href: '#' },
+                { icon: <Instagram className="h-5 w-5" />, href: "#" },
+                { icon: <Facebook className="h-5 w-5" />, href: "#" },
+                { icon: <Twitter className="h-5 w-5" />, href: "#" },
               ].map((social, index) => (
                 <a
                   key={index}
@@ -178,10 +189,10 @@ const Contact = () => {
           <div
             className={`transition-all duration-700 ease-expo-out ${
               isVisible
-                ? 'opacity-100 translate-x-0'
-                : 'opacity-0 translate-x-12'
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-12"
             }`}
-            style={{ transitionDelay: '400ms' }}
+            style={{ transitionDelay: "400ms" }}
           >
             <form
               onSubmit={handleSubmit}
@@ -192,9 +203,9 @@ const Contact = () => {
                 <div className="relative">
                   <label
                     className={`absolute left-4 transition-all duration-200 pointer-events-none ${
-                      focusedField === 'name' || formData.name
-                        ? '-top-2 text-xs text-pink bg-dark px-1'
-                        : 'top-4 text-white/50'
+                      focusedField === "name" || formData.name
+                        ? "-top-2 text-xs text-pink bg-dark px-1"
+                        : "top-4 text-white/50"
                     }`}
                   >
                     Full Name
@@ -204,7 +215,7 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    onFocus={() => setFocusedField('name')}
+                    onFocus={() => setFocusedField("name")}
                     onBlur={() => setFocusedField(null)}
                     className="bg-white/10 border-white/20 text-white h-14 pt-2 focus:border-pink focus:ring-pink/20"
                     required
@@ -215,9 +226,9 @@ const Contact = () => {
                 <div className="relative">
                   <label
                     className={`absolute left-4 transition-all duration-200 pointer-events-none ${
-                      focusedField === 'email' || formData.email
-                        ? '-top-2 text-xs text-pink bg-dark px-1'
-                        : 'top-4 text-white/50'
+                      focusedField === "email" || formData.email
+                        ? "-top-2 text-xs text-pink bg-dark px-1"
+                        : "top-4 text-white/50"
                     }`}
                   >
                     Email Address
@@ -227,7 +238,7 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    onFocus={() => setFocusedField('email')}
+                    onFocus={() => setFocusedField("email")}
                     onBlur={() => setFocusedField(null)}
                     className="bg-white/10 border-white/20 text-white h-14 pt-2 focus:border-pink focus:ring-pink/20"
                     required
@@ -238,9 +249,9 @@ const Contact = () => {
                 <div className="relative sm:col-span-2">
                   <label
                     className={`absolute left-4 transition-all duration-200 pointer-events-none ${
-                      focusedField === 'phone' || formData.phone
-                        ? '-top-2 text-xs text-pink bg-dark px-1'
-                        : 'top-4 text-white/50'
+                      focusedField === "phone" || formData.phone
+                        ? "-top-2 text-xs text-pink bg-dark px-1"
+                        : "top-4 text-white/50"
                     }`}
                   >
                     Phone Number
@@ -250,7 +261,7 @@ const Contact = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    onFocus={() => setFocusedField('phone')}
+                    onFocus={() => setFocusedField("phone")}
                     onBlur={() => setFocusedField(null)}
                     className="bg-white/10 border-white/20 text-white h-14 pt-2 focus:border-pink focus:ring-pink/20"
                   />
@@ -258,23 +269,31 @@ const Contact = () => {
 
                 {/* Message Field */}
                 <div className="relative sm:col-span-2">
-                  <label
+                  {/* <label
                     className={`absolute left-4 transition-all duration-200 pointer-events-none z-10 ${
-                      focusedField === 'message' || formData.message
-                        ? '-top-2 text-xs text-pink bg-dark px-1'
-                        : 'top-4 text-white/50'
+                      focusedField === "message" || formData.message
+                        ? "-top-2 text-xs text-pink bg-dark px-1"
+                        : "top-4 text-white/50"
                     }`}
                   >
                     Your Message
-                  </label>
-                  <Textarea
+                  </label> */}
+                  {/* <Textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    onFocus={() => setFocusedField('message')}
+                    onFocus={() => setFocusedField("message")}
                     onBlur={() => setFocusedField(null)}
                     className="bg-white/10 border-white/20 text-white min-h-[120px] pt-4 focus:border-pink focus:ring-pink/20 resize-none"
                     required
+                  /> */}
+                  <CustomDateInput
+                    name="date"
+                    // label="Preferred Date"
+                    value={formData.date}
+                    onChange={(e) =>
+                      setFormData({ ...formData, date: e.target.value })
+                    }
                   />
                 </div>
               </div>
@@ -283,11 +302,9 @@ const Contact = () => {
               <Button
                 type="submit"
                 className={`w-full mt-6 bg-pink text-dark hover:bg-white hover:scale-[1.02] transition-all duration-500 ease-elastic h-14 text-base font-body ${
-                  isVisible
-                    ? 'opacity-100 scale-100'
-                    : 'opacity-0 scale-80'
+                  isVisible ? "opacity-100 scale-100" : "opacity-0 scale-80"
                 }`}
-                style={{ transitionDelay: '1000ms' }}
+                style={{ transitionDelay: "1000ms" }}
               >
                 <Send className="mr-2 h-4 w-4" />
                 Send Message
